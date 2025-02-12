@@ -102,49 +102,50 @@ const pluginFactory: BuilderComponentPluginFactory<PluginConfig> = (config?) => 
       type: ChunkType.STRING,
       fileType: cfg.fileType,
       name: REACT_CHUNK_NAME.ClassRenderJSX,
-      content: `
-        const __$$context = this._context || this;
-        const { state } = __$$context;
-        return ${jsxContent};
-      `,
+      // content: `
+      //   const __$$context = this._context || this;
+      //   const { state } = __$$context;
+      //   return ${jsxContent};
+      // `,
+      content: jsxContent,
       linkAfter: [REACT_CHUNK_NAME.ClassRenderStart, REACT_CHUNK_NAME.ClassRenderPre],
     });
 
-    next.chunks.push({
-      type: ChunkType.STRING,
-      fileType: cfg.fileType,
-      name: COMMON_CHUNK_NAME.CustomContent,
-      content: [
-        tolerateEvalErrors &&
-          `
-          function __$$eval(expr) {
-            try {
-              return expr();
-            } catch (error) {
-              ${evalErrorsHandler}
-            }
-          }
+    // next.chunks.push({
+    //   type: ChunkType.STRING,
+    //   fileType: cfg.fileType,
+    //   name: COMMON_CHUNK_NAME.CustomContent,
+    //   content: [
+    //     tolerateEvalErrors &&
+    //       `
+    //       function __$$eval(expr) {
+    //         try {
+    //           return expr();
+    //         } catch (error) {
+    //           ${evalErrorsHandler}
+    //         }
+    //       }
 
-          function __$$evalArray(expr) {
-            const res = __$$eval(expr);
-            return Array.isArray(res) ? res : [];
-          }
-      `,
-        `
-        function __$$createChildContext(oldContext, ext) {
-          const childContext = {
-            ...oldContext,
-            ...ext,
-          };
-          childContext.__proto__ = oldContext;
-          return childContext;
-        }
-      `,
-      ]
-        .filter(Boolean)
-        .join('\n'),
-      linkAfter: [COMMON_CHUNK_NAME.FileExport],
-    });
+    //       function __$$evalArray(expr) {
+    //         const res = __$$eval(expr);
+    //         return Array.isArray(res) ? res : [];
+    //       }
+    //   `,
+    //     `
+    //     function __$$createChildContext(oldContext, ext) {
+    //       const childContext = {
+    //         ...oldContext,
+    //         ...ext,
+    //       };
+    //       childContext.__proto__ = oldContext;
+    //       return childContext;
+    //     }
+    //   `,
+    //   ]
+    //     .filter(Boolean)
+    //     .join('\n'),
+    //   linkAfter: [COMMON_CHUNK_NAME.FileExport],
+    // });
     return next;
   };
   return plugin;

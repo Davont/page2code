@@ -36,13 +36,13 @@ const pluginFactory: BuilderComponentPluginFactory<PluginConfig> = (config?) => 
       linkAfter: [COMMON_CHUNK_NAME.StyleDepsImport],
     });
 
-    next.chunks.push({
-      type: ChunkType.STRING,
-      fileType: cfg.moduleFileType,
-      name: COMMON_CHUNK_NAME.InternalDepsImport,
-      content: `import './index.${cfg.fileType}';`,
-      linkAfter: [COMMON_CHUNK_NAME.ExternalDepsImport],
-    });
+    // next.chunks.push({
+    //   type: ChunkType.STRING,
+    //   fileType: cfg.moduleFileType,
+    //   name: COMMON_CHUNK_NAME.InternalDepsImport,
+    //   content: `import './index.${cfg.fileType}';`,
+    //   linkAfter: [COMMON_CHUNK_NAME.ExternalDepsImport],
+    // });
 
     return next;
   };

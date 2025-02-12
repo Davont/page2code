@@ -13,7 +13,7 @@ const buildConfig = {
   metafile: enableAnalyze,
   bundle: true,
   target: ['chrome69'],
-  format: 'iife',
+  format: 'esm',
   sourcemap: true,
   sourcesContent: true,
   plugins: [

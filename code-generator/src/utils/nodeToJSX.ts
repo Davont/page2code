@@ -402,6 +402,8 @@ const defaultReactGeneratorConfig: NodeGeneratorConfig = {
 
 export function createReactNodeGenerator(cfg?: NodeGeneratorConfig): NodeGenerator<string> {
   const newCfg = mergeNodeGeneratorConfig(defaultReactGeneratorConfig, cfg);
-
+  console.log('====================================');
+  console.log('newCfg', newCfg);
+  console.log('====================================');
   return createNodeGenerator(newCfg);
 }
