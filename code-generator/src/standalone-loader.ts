@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import type { IPublicTypeProjectSchema, ResultDir } from '@alilc/lowcode-types';
 import type { FlattenFile } from './types/file';
 
@@ -8,7 +7,7 @@ declare const __PACKAGE_VERSION__: string;
 
 const packageVersion = __PACKAGE_VERSION__ || 'latest';
 
-export const DEFAULT_WORKER_JS = `https://cdn.jsdelivr.net/npm/@alilc/lowcode-code-generator@${packageVersion}/dist/standalone-worker.min.js`;
+export const DEFAULT_WORKER_JS = '';
 
 export const DEFAULT_TIMEOUT_IN_MS = 60 * 1000;
 
@@ -104,17 +103,9 @@ async function loadWorkerJs(workerJsUrl: string) {
     return cached;
   }
 
-  const workerJsContent = await fetch(workerJsUrl)
-    .then((res) => res.text())
-    .catch((err) => {
-      throw new Error(`Failed to fetch worker js: ${err}`);
-    });
-
   const workerJs = {
-    content: workerJsContent,
-    url: self.URL.createObjectURL(
-      new self.Blob([workerJsContent], { type: 'application/javascript' }),
-    ),
+    content: '', // 内容已通过外部 URL 提供，不需要获取内容
+    url: workerJsUrl, // 直接使用传入的 Worker URL
   };
 
   workerJsCache.set(workerJsUrl, workerJs);

@@ -3,7 +3,7 @@
 echo building types...
 tsc --outDir types --declaration --emitDeclarationOnly &&  \
   echo built types...
-  rm -rf types
+  rm -rf types/types
   mv types/code-generator/src/* types/
   rm -rf types/code-generator
 

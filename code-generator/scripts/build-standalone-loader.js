@@ -12,7 +12,7 @@ const buildConfig = {
   metafile: enableAnalyze,
   bundle: true,
   target: ['chrome69'],
-  format: 'cjs',
+  format: 'esm',
   sourcemap: true,
   sourcesContent: true,
   external: Object.keys(require('../package.json').dependencies),
